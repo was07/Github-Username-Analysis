@@ -1,0 +1,63 @@
+body {
+    font-family: sans-serif;
+    background-color: #0D1117;
+    margin: 0;
+}
+
+#input {
+    background: none;
+    font-size: 2em;
+    color: rgb(255, 255, 255);
+    padding: 0.4em 0.6em;
+    outline: none;
+    border: rgba(0, 0, 0, 0) solid 1px;
+}
+
+#input:focus {
+    border: #1F6FEB solid 1px;
+}
+
+#output {
+    display: flex;
+    flex-direction: column;
+    padding: 0.4em 0.6em;
+}
+
+#avatar {
+    color: #fff;
+    width: 15vw;
+    height: 15vw;
+    min-width: 250px;
+    min-height: 250px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+#output > #name {
+    font-size: 2em;
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+#output > #bio {
+    font-size: 1.2em;
+    color: rgb(228, 228, 228);
+    margin: 0;
+}
+
+#output > #location {
+    color: #fff;
+}
+
+#blog {
+    color: #fff;
+}
+#blog:hover {
+    color: #c5c5c5;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#output > .num {
+    color: rgb(255, 255, 255);
+}
