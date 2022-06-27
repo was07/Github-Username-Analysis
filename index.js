@@ -1,32 +1,28 @@
 function pro(res) {
     console.log(res);
+    found = res.login == undefined
 
-    u = document.getElementById('input').value;
+    document.getElementById('avatar').src = (found) ? '/images/error.png' : res.avatar_url;
 
-    if (u) {
-        document.getElementById('avatar').src = res.avatar_url;
-        document.getElementById('avatar-link').href = res.html_url;
+    document.getElementById('name').innerHTML = (found) ? 'Not Found' : res.name;
 
-        document.getElementById('name').innerHTML = res.name;
+    document.getElementById('bio').innerHTML = (found) ? 'This Username does not exist' : res.bio;
 
-        document.getElementById('bio').innerHTML = res.bio;
+    document.getElementById('company').innerHTML = (found) ? '' : res.company;
 
-        document.getElementById('location').innerHTML = res.location;
+    document.getElementById('location').innerHTML = (found) ? '' : res.location;
 
-        document.getElementById('blog').innerHTML = res.blog;
-        document.getElementById('blog').href = res.blog;
+    document.getElementById('blog').innerHTML = (found) ? '' : res.blog;
+    document.getElementById('blog').href = (found) ? '' : res.blog;
 
-        document.getElementById('followers').innerHTML = "Followers: " + res.followers;
+    document.getElementById('followers').innerHTML = (found) ? '' : "Followers: " + res.followers;
 
-        document.getElementById('following').innerHTML = "Following: " + res.following;
+    document.getElementById('following').innerHTML = (found) ? '' : "Following: " + res.following;
 
-        document.getElementById('public_repos').innerHTML = "Public Repositories: " + res.public_repos;
-    }
+    document.getElementById('public_repos').innerHTML = (found) ? '' : "Public Repositories: " + res.public_repos;
 }
 
 function fun() {
-    console.log('FUN');
-
     u = document.getElementById('input').value;
 
     res = fetch('https://api.github.com/users/' + u)
@@ -40,5 +36,4 @@ document.getElementById('input').addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {
         fun();
     }
-}
-);
+});
