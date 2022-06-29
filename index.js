@@ -15,11 +15,16 @@ function pro(res) {
     document.getElementById('blog').innerHTML = (found) ? '' : res.blog;
     document.getElementById('blog').href = (found) ? '' : res.blog;
 
+    document.getElementById('twitter').innerHTML = (found) ? '' : '@' + res.twitter_username;
+    document.getElementById('twitter').href = (found) ? '' : 'https://twitter.com/' + res.twitter_username;
+
     document.getElementById('followers').innerHTML = (found) ? '' : "Followers: " + res.followers;
 
     document.getElementById('following').innerHTML = (found) ? '' : "Following: " + res.following;
 
     document.getElementById('public_repos').innerHTML = (found) ? '' : "Public Repositories: " + res.public_repos;
+
+    // document.getElementById('stared-topics').innerHTML = (found) ? '' : res.;
 }
 
 function fun() {

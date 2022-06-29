@@ -48,13 +48,15 @@ body {
     margin-bottom: 0.5em;
 }
 
-#blog-wrapper {
-    margin-bottom: 1em;
-}
 #blog {
     color: #fff;
-    margin-bottom: 0.5em;
 }
+
+#twitter {
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
 #blog:hover {
     color: #c5c5c5;
     text-decoration: underline;
