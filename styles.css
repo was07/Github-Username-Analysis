@@ -55,6 +55,7 @@ body {
 #twitter {
     margin-bottom: 0.5em;
     color: #fff;
+    text-decoration: none;
 }
 
 #blog:hover {
