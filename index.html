@@ -6,26 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github Username Explorer</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/154f7099c1.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <input type="text" id="input" placeholder="Enter a username" value="was07">
+    <input type="text" id="input" placeholder="Enter a username" value="was07" spellcheck="false">
     <script src="index.js"></script>
     <div id="output">
         <img id="avatar" alt="coudn't load avatar"></img>
-        <div id="name"></div>
-        <div id="bio"></div>
-        <div id="company"></div>
-        <div id="location"></div>
-        <a id="blog" target="_blank"></a>
-        <a id="twitter"></a>
-        <div class="num" id="followers"></div>
-        <div class="num" id="following"></div>
-        <div class="num" id="public_repos"></div>
-        <div class="num" id="public_gists"></div>
-    </div>
-    <div id="output-2">
-        <div id="stared-topics">
-            <!--  -->
+        <div id="part-1">
+            <div id="name"></div>
+            <div id="bio"></div>
+        </div>
+        <div id="part-2">
+            <div id="company"></div>
+            <div id="location"></div>
+            <a id="blog" target="_blank"></a>
+            <a id="twitter"></a>
+        </div>
+        <div id="part-3">
+            <div style="margin-right: 10px"><div class="num" id="followers"></div> Followers</div>
+            <div><div class="num" id="following"></div> Following</div>
+            <div>Follows back <div class="num" id="ff"></div> of his followers <i id="ff-tool-tip" class="fa-solid fa-circle-info" data-text="Only works if followers and followings are lower than 100."></i></div>
+        </div>
+        <div id="part-4">
+            <div class="num" id="public_repos"></div>
+            <div class="num" id="public_gists"></div>
         </div>
     </div>
 </body>
