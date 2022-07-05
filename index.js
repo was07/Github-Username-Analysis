@@ -1,40 +1,43 @@
 function pro(res) {
     console.log(res);
-    found = res.login == undefined
+    error = res.login == undefined
+    console.log(error)
 
-    document.getElementById('avatar').src = (found) ? '/images/error.png' : res.avatar_url;
+    document.getElementById('avatar').src = (error) ? '/images/error.png' : res.avatar_url;
 
-    document.getElementById('name').innerHTML = (found) ? 'Not Found' : res.name;
+    document.getElementById('name').innerHTML = (error) ? 'Not found' : res.name;
 
-    document.getElementById('bio').innerHTML = (found) ? 'This Username does not exist' : res.bio;
+    document.getElementById('bio').innerHTML = (error) ? 'This Username does not exist' : res.bio;
 
-    document.getElementById('company').innerHTML = (found) ? '' : res.company;
+    document.getElementById('company').innerHTML = (error) ? '' : res.company;
 
-    document.getElementById('location').innerHTML = (found) ? '' : res.location;
+    document.getElementById('location').innerHTML = (error) ? '' : res.location;
 
-    document.getElementById('blog').innerHTML = (found) ? '' : res.blog;
-    document.getElementById('blog').href = (found) ? '' : res.blog;
+    document.getElementById('blog').innerHTML = (error) ? '' : res.blog;
+    document.getElementById('blog').href = (error) ? '' : res.blog;
 
-    document.getElementById('twitter').innerHTML = (found) ? '' : '@' + res.twitter_username;
-    document.getElementById('twitter').href = (found) ? '' : 'https://twitter.com/' + res.twitter_username;
+    document.getElementById('twitter').innerHTML = (error) ? '' : ('@' + res.twitter_username);
+    document.getElementById('twitter').href = (error) ? '' : 'https://twitter.com/' + res.twitter_username;
 
-    document.getElementById('followers').innerHTML = (found) ? '?' : res.followers.toLocaleString("en-US");
+    document.getElementById('followers').innerHTML = (error) ? '?' : res.followers.toLocaleString("en-US");
 
-    document.getElementById('following').innerHTML = (found) ? '?' : res.following.toLocaleString("en-US");
+    document.getElementById('following').innerHTML = (error) ? '?' : res.following.toLocaleString("en-US");
 
     // get how many followers the user follow
     get(res.followers_url + "?per_page=100").then(followers => function(followers) {
-        get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following, found));
+        get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following, error));
     }(followers));
 
-    document.getElementById('public_repos').innerHTML = "Public Repositories: " + ((found) ? '?' : res.public_repos);
+    document.getElementById('public_repos').innerHTML = "Public Repositories: " + ((error) ? '?' : res.public_repos);
     
-    document.getElementById('public_gists').innerHTML = "Public Gists: " + ((found) ? '?' : res.public_gists);
+    document.getElementById('public_gists').innerHTML = "Public Gists: " + ((error) ? '?' : res.public_gists);
 
-    // document.getElementById('stared-topics').innerHTML = (found) ? '' : res.;
+    // document.getElementById('stared-topics').innerHTML = (error) ? '' : res.;
+
+    console.log(T (res.created_at))
 }
 
-function proccessFollowers(followers, following, found) {
+function proccessFollowers(followers, following, error) {
     // return how many followers the user follow
     console.log(followers)
     console.log(following)
@@ -46,7 +49,7 @@ function proccessFollowers(followers, following, found) {
             }
         }
     }
-    document.getElementById('ff').innerHTML = (found)? '?' : ff.toLocaleString("en-US");
+    document.getElementById('ff').innerHTML = (error)? '?' : ff.toLocaleString("en-US");
 }
 
 function get(url) {
@@ -55,8 +58,7 @@ function get(url) {
         headers: new Headers(
             {
                 'User-Agent': 'request',
-                'Authorization': 'token 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',
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Authorization': 'TOKEN GOES HERE',
             }
         )
     }).then(res => res.json());
