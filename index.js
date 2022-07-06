@@ -16,7 +16,7 @@ function pro(res) {
     document.getElementById('blog').innerHTML = (error) ? '' : res.blog;
     document.getElementById('blog').href = (error) ? '' : res.blog;
 
-    document.getElementById('twitter').innerHTML = (error) ? '' : ('@' + res.twitter_username);
+    document.getElementById('twitter').innerHTML = (error) ? '' : ((res.twitter_username == null) ? '' : '@' + res.twitter_username);
     document.getElementById('twitter').href = (error) ? '' : 'https://twitter.com/' + res.twitter_username;
 
     document.getElementById('followers').innerHTML = (error) ? '?' : res.followers.toLocaleString("en-US");
@@ -32,18 +32,16 @@ function pro(res) {
     
     document.getElementById('public_gists').innerHTML = "Public Gists: " + ((error) ? '?' : res.public_gists);
 
-    // document.getElementById('stared-topics').innerHTML = (error) ? '' : res.;
-
     // create a time from res.created_at
     var date = new Date(res.created_at);
-    // get the difference from today to that date
-    var diff = Math.floor((new Date() - date) / 1000);
-    // get the difference in years
-    var years = Math.floor(diff / (365 * 60 * 60 * 24));
     // get the difference in months
-    var months = Math.floor(diff / (30 * 24 * 60 * 60));
+    var total_months = Math.floor((new Date() - date) / (1000 * 60 * 60 * 24 * 30));
 
-    document.getElementById('created').innerHTML = (error) ? '' : "Account created " + years + " years, " + months + " months ago";
+    var years = Math.floor(total_months / 12);
+    var months = total_months % 12;
+
+    if (years) {message = years + ' years and ' + months + ' months';} else {message = months + ' months';}
+    document.getElementById('created').innerHTML = (error) ? '' : "Account created " + message + " ago";
 }
 
 function proccessFollowers(followers, following, error) {
@@ -76,9 +74,9 @@ function get(url) {
 }
 
 function fun() {
-    u = document.getElementById('input').value;
+    user_name = document.getElementById('input').value;
 
-    get("https://api.github.com/users/" + u).then(res => pro(res));
+    get("https://api.github.com/users/" + user_name).then(res => pro(res));
 }
 
 fun()
