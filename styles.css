@@ -79,19 +79,6 @@ body {
     cursor: pointer;
 }
 
-#part-4 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    color: #fff;
-    border: 1px solid #FFFFFF33;
-    padding: 0.4em 0.6em;
-    border-radius: 0.3em;
-    margin-bottom: 1em;
-}
-
-#part-4 > div {
-    margin: .2em;
-}
 
 #ff-tool-tip {
     font-size: .8em;
@@ -108,7 +95,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     transition: opacity .5s ease-in-out;
-  
+    
     position: absolute;
     z-index: 1;
     left: 0;
@@ -135,15 +122,32 @@ body {
 
 #following, #followers, #ff {
     color: red;
-    display: inline;
 }
 
 #output > .num {
     color: rgb(255, 255, 255);
 }
 
-#part-5 {
+#part-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: #fff;
     border: 1px solid #FFFFFF33;
+    padding: 0.4em 0.6em;
+    border-radius: 0.3em;
+    margin-bottom: 1em;
+}
+
+#part-4 > div {
+    margin: .2em;
+}
+
+#public_repos, #public_gists {
+    color: #ff0000;
+}
+
+#part-5 {
+    color: rgb(172, 172, 172);
     padding: 0.4em 0.6em;
     border-radius: 0.3em;
     margin-bottom: 1em;

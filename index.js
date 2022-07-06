@@ -28,9 +28,9 @@ function pro(res) {
         get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following, error));
     }(followers));
 
-    document.getElementById('public_repos').innerHTML = "Public Repositories: " + ((error) ? '?' : res.public_repos);
+    document.getElementById('public_repos').innerHTML = (error) ? '?' : res.public_repos;
     
-    document.getElementById('public_gists').innerHTML = "Public Gists: " + ((error) ? '?' : res.public_gists);
+    document.getElementById('public_gists').innerHTML = (error) ? '?' : res.public_gists;
 
     // create a time from res.created_at
     var date = new Date(res.created_at);
