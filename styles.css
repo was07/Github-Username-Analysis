@@ -25,6 +25,12 @@ body {
     color: #fff;
 }
 
+@media screen and (max-width: 800px) {
+    #output {
+        max-width: 100%;
+    }
+}
+
 #avatar {
     color: #fff;
     width: 15vw;
@@ -80,6 +86,7 @@ body {
     border: 1px solid #FFFFFF33;
     padding: 0.4em 0.6em;
     border-radius: 0.3em;
+    margin-bottom: 1em;
 }
 
 #part-4 > div {
@@ -133,4 +140,11 @@ body {
 
 #output > .num {
     color: rgb(255, 255, 255);
+}
+
+#part-5 {
+    border: 1px solid #FFFFFF33;
+    padding: 0.4em 0.6em;
+    border-radius: 0.3em;
+    margin-bottom: 1em;
 }

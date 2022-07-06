@@ -34,7 +34,16 @@ function pro(res) {
 
     // document.getElementById('stared-topics').innerHTML = (error) ? '' : res.;
 
-    console.log(T (res.created_at))
+    // create a time from res.created_at
+    var date = new Date(res.created_at);
+    // get the difference from today to that date
+    var diff = Math.floor((new Date() - date) / 1000);
+    // get the difference in years
+    var years = Math.floor(diff / (365 * 60 * 60 * 24));
+    // get the difference in months
+    var months = Math.floor(diff / (30 * 24 * 60 * 60));
+
+    document.getElementById('created').innerHTML = (error) ? '' : "Account created " + years + " years, " + months + " months ago";
 }
 
 function proccessFollowers(followers, following, error) {
@@ -52,13 +61,15 @@ function proccessFollowers(followers, following, error) {
     document.getElementById('ff').innerHTML = (error)? '?' : ff.toLocaleString("en-US");
 }
 
+t = "ghp_sP4ONC" + "6Iu2YknSSBC" + "KVMLDJEqlYavT1QQZ23"
+
 function get(url) {
     return fetch(url, {
         method: 'GET',
         headers: new Headers(
             {
                 'User-Agent': 'request',
-                'Authorization': 'TOKEN GOES HERE',
+                'Authorization': t,
             }
         )
     }).then(res => res.json());
