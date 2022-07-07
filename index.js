@@ -1,7 +1,12 @@
+var HISTORY = new Array();
+
+
 function pro(res) {
     console.log(res);
     error = res.login == undefined
     console.log(error)
+    if (!error) {HISTORY.push(res.login);}
+    console.log(HISTORY)
 
     document.getElementById('avatar').src = (error) ? '/images/error.png' : res.avatar_url;
 
