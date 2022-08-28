@@ -1,41 +1,46 @@
+// Sad, github api recives
+
 var HISTORY = new Array();
 
+const errorDiv = document.getElementById('error');
+const outputDiv = document.getElementById('output');
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function pro(res) {
     console.log(res);
-    error = res.login == undefined
-    console.log(error)
-    if (!error) {HISTORY.push(res.login);}
-    console.log(HISTORY)
+    let error = res.login == undefined
+    if (error) {
+        console.warn("error: something went wrong")
 
-    document.getElementById('avatar').src = (error) ? '/images/error.png' : res.avatar_url;
+        errorDiv.style.visibility = 'visible'
+        outputDiv.style.visibility = 'hidden'
+        return
+    } else {
+        HISTORY.push(res.login);
+        errorDiv.style.visibility = 'hidden'
+        outputDiv.style.visibility = 'visible'
+    }
+    console.log(HISTORY.length)
 
-    document.getElementById('name').innerHTML = (error) ? 'Not found' : res.name;
+    document.getElementById('avatar').src = res.avatar_url;
 
-    document.getElementById('bio').innerHTML = (error) ? 'This Username does not exist' : res.bio;
+    document.getElementById('name').innerHTML = res.name;
 
-    document.getElementById('company').innerHTML = (error) ? '' : res.company;
+    document.getElementById('followers').innerHTML = res.followers.toLocaleString("en-US");
 
-    document.getElementById('location').innerHTML = (error) ? '' : res.location;
-
-    document.getElementById('blog').innerHTML = (error) ? '' : res.blog;
-    document.getElementById('blog').href = (error) ? '' : res.blog;
-
-    document.getElementById('twitter').innerHTML = (error) ? '' : ((res.twitter_username == null) ? '' : '@' + res.twitter_username);
-    document.getElementById('twitter').href = (error) ? '' : 'https://twitter.com/' + res.twitter_username;
-
-    document.getElementById('followers').innerHTML = (error) ? '?' : res.followers.toLocaleString("en-US");
-
-    document.getElementById('following').innerHTML = (error) ? '?' : res.following.toLocaleString("en-US");
+    document.getElementById('following').innerHTML = res.following.toLocaleString("en-US");
 
     // get how many followers the user follow
     get(res.followers_url + "?per_page=100").then(followers => function(followers) {
         get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following, error));
     }(followers));
 
-    document.getElementById('public_repos').innerHTML = (error) ? '?' : res.public_repos;
+    document.getElementById('public_repos').innerHTML = res.public_repos;
     
-    document.getElementById('public_gists').innerHTML = (error) ? '?' : res.public_gists;
+    document.getElementById('public_gists').innerHTML = res.public_gists;
 
     // create a time from res.created_at
     var date = new Date(res.created_at);
@@ -50,6 +55,8 @@ function pro(res) {
 }
 
 function proccessFollowers(followers, following, error) {
+    document.getElementById('ff').innerHTML = 'loading';
+    sleep(1000); console.log('sleeped')
     // return how many followers the user follow
     console.log(followers)
     console.log(following)
@@ -61,7 +68,7 @@ function proccessFollowers(followers, following, error) {
             }
         }
     }
-    document.getElementById('ff').innerHTML = (error)? '?' : ff.toLocaleString("en-US");
+    document.getElementById('ff').innerHTML = ff.toLocaleString("en-US");
 }
 
 t = "ghp_sP4ONC" + "6Iu2YknSSBC" + "KVMLDJEqlYavT1QQZ23"
@@ -79,6 +86,7 @@ function get(url) {
 }
 
 function fun() {
+    console.log('fun called')
     user_name = document.getElementById('input').value;
 
     get("https://api.github.com/users/" + user_name).then(res => pro(res));
