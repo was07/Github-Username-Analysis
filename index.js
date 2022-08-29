@@ -2,10 +2,13 @@
 
 var HISTORY = new Array();
 
+const messageDiv = document.getElementById('message')
 const errorDiv = document.getElementById('error');
+const errorMessageDiv = document.getElementById('error-meesage')
 const outputDiv = document.getElementById('output');
 
 function sleep(ms) {
+    console.log('Sleeping for ' + ms / 1000 + ' seconds')
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -15,19 +18,24 @@ function pro(res) {
     if (error) {
         console.warn("error: something went wrong")
 
-        errorDiv.style.visibility = 'visible'
-        outputDiv.style.visibility = 'hidden'
+        errorDiv.style.visibility = 'visible'; errorDiv.style.position = 'absolute';
+        outputDiv.style.visibility = 'hidden'; errorDiv.style.position = 'relative';
         return
     } else {
         HISTORY.push(res.login);
-        errorDiv.style.visibility = 'hidden'
-        outputDiv.style.visibility = 'visible'
+        errorDiv.style.visibility = 'hidden'; errorDiv.style.position = 'relative';
+        outputDiv.style.visibility = 'visible'; errorDiv.style.position = 'absolute';
     }
     console.log(HISTORY.length)
 
     document.getElementById('avatar').src = res.avatar_url;
 
-    document.getElementById('name').innerHTML = res.name;
+    if (res.name !== res.login) {
+        document.getElementById('name').innerHTML = res.name;
+        document.getElementById('login').innerHTML = res.login;
+    } else {
+        document.getElementById('name').innerHTML = res.login;
+    }
 
     document.getElementById('followers').innerHTML = res.followers.toLocaleString("en-US");
 
@@ -35,7 +43,7 @@ function pro(res) {
 
     // get how many followers the user follow
     get(res.followers_url + "?per_page=100").then(followers => function(followers) {
-        get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following, error));
+        get("https://api.github.com/users/" + res.login + "/following?per_page=100").then(following => proccessFollowers(followers, following));
     }(followers));
 
     document.getElementById('public_repos').innerHTML = res.public_repos;
@@ -54,9 +62,9 @@ function pro(res) {
     document.getElementById('created').innerHTML = (error) ? '' : "Account created " + message + " ago";
 }
 
-function proccessFollowers(followers, following, error) {
+function proccessFollowers(followers, following) {
     document.getElementById('ff').innerHTML = 'loading';
-    sleep(1000); console.log('sleeped')
+    sleep(1000)
     // return how many followers the user follow
     console.log(followers)
     console.log(following)
@@ -86,17 +94,31 @@ function get(url) {
 }
 
 function fun() {
-    console.log('fun called')
     user_name = document.getElementById('input').value;
-
-    get("https://api.github.com/users/" + user_name).then(res => pro(res));
+    
+    if (user_name) {
+        get("https://api.github.com/users/" + user_name).then(res => pro(res));
+    } else {
+        pro({});
+    }
+    sleep(2000)
 }
 
 fun()
 
 // add event listener for enter key for fun()
 document.getElementById('input').addEventListener('keyup', function(e) {
-    if (e.keyCode == 13) {
+    console.log("ku")
+
+    user_name = document.getElementById('input').value;
+
+    if (user_name) {
+        messageDiv.innerHTML = "Press Enter to get profile"
+    } else {
+        messageDiv.innerHTML = ""
+    }
+
+    if (e.keyCode == 13) {  // enter key
         fun();
     }
 });

@@ -9,30 +9,31 @@
     <script src="https://kit.fontawesome.com/154f7099c1.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <input type="text" id="input" placeholder="Enter a username" spellcheck="false">
-    <div id="error"></div>
-    <div id="output">
-        <img id="avatar" alt="."></img>
-        <div id="part-1">
-            <div id="name"></div>
+    <div id="container">
+        <input type="text" id="input" placeholder="Enter a username" spellcheck="false">
+        <div id="message"></div>
+        <div id="error">
+            <i id="error-icon" class="fa-solid fa-circle-info"></i>
+            <div id="error-text"> Something went wrong</div>
         </div>
-        <div id="part-2">
-            <div id="company"></div>
-            <div id="location"></div>
-            <a id="blog" target="_blank"></a>
-            <a id="twitter" target="_blank"></a>
-        </div>
-        <div id="part-3">
-            <div style="margin-right: 10px"><span class="num" id="followers"></span> Followers</div>
-            <div><span class="num" id="following"></span> Following</div>
-            <div>Follows <span class="num" id="ff"></span> of their followers <i id="ff-tool-tip" class="fa-solid fa-circle-info" data-text="Only works if followers and followings are lower than 100."></i></div>
-        </div>
-        <div id="part-4">
-            <div>Public Repositories <span class="num" id="public_repos"></span></div>
-            <div>Public Gists <span class="num" id="public_gists"></span></div>
-        </div>
-        <div id="part-5">
-            <div id="created"></div>
+        <div id="output">
+            <img id="avatar" alt="."></img>
+            <div id="part-1">
+                <div id="name"></div>
+                <div id="login"></div>
+            </div>
+            <div id="part-3">
+                <div style="margin-right: 10px"><span class="num" id="followers"></span> Followers</div>
+                <div><span class="num" id="following"></span> Following</div>
+                <div>Follows <span class="num" id="ff"></span> of their followers <i id="ff-tool-tip" class="fa-solid fa-circle-info" data-text="Only works if followers and followings are lower than 100."></i></div>
+            </div>
+            <div id="part-4">
+                <div>Public Repositories <span class="num" id="public_repos"></span></div>
+                <div>Public Gists <span class="num" id="public_gists"></span></div>
+            </div>
+            <div id="part-5">
+                <div id="created"></div>
+            </div>
         </div>
     </div>
     <script src="index.js"></script>
