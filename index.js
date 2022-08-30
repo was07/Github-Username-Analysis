@@ -3,8 +3,6 @@
 var HISTORY = new Array();
 
 const messageDiv = document.getElementById('message')
-const errorDiv = document.getElementById('error');
-const errorMessageDiv = document.getElementById('error-meesage')
 const outputDiv = document.getElementById('output');
 
 function sleep(ms) {
@@ -12,27 +10,29 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function pro(res) {
+function update_page(res, bluff_call=false) {
     console.log(res);
     let error = res.login == undefined
     if (error) {
         console.warn("error: something went wrong")
 
-        errorDiv.style.visibility = 'visible'; errorDiv.style.position = 'absolute';
-        outputDiv.style.visibility = 'hidden'; errorDiv.style.position = 'relative';
+        // errorDiv.style.visibility = 'visible'; errorDiv.style.position = 'absolute';
+        outputDiv.style.visibility = 'hidden'
+        if (!bluff_call) {
+            messageDiv.innerHTML = "Invalid Username"
+        }
         return
     } else {
         HISTORY.push(res.login);
-        errorDiv.style.visibility = 'hidden'; errorDiv.style.position = 'relative';
-        outputDiv.style.visibility = 'visible'; errorDiv.style.position = 'absolute';
+        // errorDiv.style.visibility = 'hidden'; errorDiv.style.position = 'relative';
+        outputDiv.style.visibility = 'visible'
     }
-    console.log(HISTORY.length)
-
     document.getElementById('avatar').src = res.avatar_url;
 
     if (res.name !== res.login) {
         document.getElementById('name').innerHTML = res.name;
-        document.getElementById('login').innerHTML = res.login;
+        document.getElementById('login').innerHTML = res.login + ' <i id="login-link-icon" class="fa-solid fa-up-right-from-square"></i>';
+        document.getElementById('login').href = res.html_url;
     } else {
         document.getElementById('name').innerHTML = res.login;
     }
@@ -97,11 +97,11 @@ function fun() {
     user_name = document.getElementById('input').value;
     
     if (user_name) {
-        get("https://api.github.com/users/" + user_name).then(res => pro(res));
+        get("https://api.github.com/users/" + user_name).then(res => update_page(res));
+        return Number(res.login == undefined)
     } else {
-        pro({});
+        update_page({}, bluff_call=true);
     }
-    sleep(2000)
 }
 
 fun()

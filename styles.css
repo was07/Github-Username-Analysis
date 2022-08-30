@@ -91,6 +91,19 @@ body {
     margin: 0;
 }
 
+#login {
+    text-decoration: none;
+    color: #fff;
+}
+
+#login:hover {
+    color: #1F6FEB;
+}
+
+#login-link-icon {
+    font-size: .8em;
+}
+
 #ff-tool-tip {
     font-size: .8em;
     position: relative;
@@ -169,6 +182,7 @@ body {
 /* Error CSS, works when something goes wrong */
 
 #error {
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
